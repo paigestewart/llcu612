@@ -1,0 +1,26 @@
+#~mini assignment, january 25~
+
+#first, i will create a corpus of FOXNEWS
+import urllib.request
+response = urllib.request.urlopen("https://www.foxnews.com/")
+html = response.read()
+html
+
+#now, i will parse the above messy code to find each instance of h2/title, and print a list of all titles in the mess
+from bs4 import BeautifulSoup #first i call beautifulSoup
+foxSoup = BeautifulSoup(html, 'lxml') #i assign foxSoup beautifulSoup arguments
+foxArticles = foxSoup.find_all("h2", class_="title") #i assign foxArticles to find all html title
+for foxHeadline in foxArticles: #i create a for loop(foxHeadline) to print each title from foxArticles
+    print(foxHeadline.text) #print function
+
+#next, i will create a corpus out of CBCNEWS
+import urllib.request
+response = urllib.request.urlopen('https://www.cbc.ca')
+html = response.read()
+html
+
+#now, i will parse the above messy code to find each instance of h3/headline, and print a list of all titles in the mess
+from bs4 import BeautifulSoup
+CBCsoup = BeautifulSoup(html, 'lxml')
+for headline in CBCsoup.find_all("h3", class_="headline"):
+    print(headline.text)
